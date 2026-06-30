@@ -1,0 +1,44 @@
+using UnityEngine;
+using System.Collections.Generic;
+
+[System.Serializable]
+public class PlayerData
+{
+    public PlayerRecord record;
+    public PlayerMetadata metadata;
+}
+
+[System.Serializable]
+public class PlayerRecord
+{
+    public string playerName;
+    public int level;
+    public float health;
+    public Position position;
+    public List<InventoryItem> inventory;
+}
+
+[System.Serializable]
+public class Position
+{
+    public float x;
+    public float y;
+    public float z;
+}
+
+[System.Serializable]
+public class InventoryItem
+{
+    public string itemName;
+    public int quantity;
+    public float weight;
+}
+
+[System.Serializable]
+public class PlayerMetadata
+{
+    public string id;
+    public bool isPrivate;
+    public string createdAt;
+    public string name;
+}
