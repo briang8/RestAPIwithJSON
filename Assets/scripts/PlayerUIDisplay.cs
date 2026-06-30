@@ -17,16 +17,33 @@ public class PlayerUIDisplay : MonoBehaviour
             "Health: " + record.health + "\n" +
             "Position: (" + record.position.x + ", " + record.position.y + ", " + record.position.z + ")";
 
-        foreach (Transform child in inventoryContent)
-        {
-            Destroy(child.gameObject);
-        }
+        ClearInventory();
 
         foreach (InventoryItem item in record.inventory)
         {
             GameObject newItem = Instantiate(inventoryItemPrefab, inventoryContent);
             TMP_Text itemText = newItem.GetComponent<TMP_Text>();
             itemText.text = item.itemName + " x" + item.quantity + " (weight: " + item.weight + ")";
+        }
+    }
+
+    public void ShowError(string errorMessage)
+    {
+        playerInfoText.text = "Failed to load player data.";
+
+        ClearInventory();
+
+        GameObject errorItem = Instantiate(inventoryItemPrefab, inventoryContent);
+        TMP_Text errorText = errorItem.GetComponent<TMP_Text>();
+        errorText.text = "Error: " + errorMessage;
+    }
+
+    // clears out old list items before showing new data or an error
+    void ClearInventory()
+    {
+        foreach (Transform child in inventoryContent)
+        {
+            Destroy(child.gameObject);
         }
     }
 
